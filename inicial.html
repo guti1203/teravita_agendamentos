@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teravita | Quiropraxia e Massoterapia</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    :root {
+      --marrom-escuro: #4b3527;
+      --marrom-medio: #6e4f3a;
+      --marrom-claro: #a3755c;
+      --bege: #f8f6f4;
+      --branco: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--bege);
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: var(--marrom-escuro);
+      color: var(--branco);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .logo-topo {
+      width: 80px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 0;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    nav a:hover {
+      background-color: var(--marrom-claro);
+    }
+    
+    .hero {
+      flex: 1;
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--branco);
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+    
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--marrom-claro);
+      color: var(--branco);
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: var(--marrom-medio);
+      transform: translateY(-3px);
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    footer {
+      background-color: var(--marrom-escuro);
+      color: var(--branco);
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+    
+    @media (max-width: 1024px) {
+      .hero {
+        min-height: 50vh;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      nav ul {
+        gap: 10px;
+      }
+      
+      .hero {
+        min-height: 45vh;
+      }
+      
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 10px;
+      }
+      
+      .logo-topo {
+        width: 70px;
+      }
+      
+      h1 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+      
+      nav a {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+      }
+      
+      .hero {
+        min-height: 60vh;
+        background-image: url('img/banner-mobile.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .hero-bg {
+        display: none;
+      }
+      
+      .hero h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+      
+      .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+      }
+      
+      .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (min-width: 481px) {
+      .hero {
+        background-image: url('img/banner.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .hero-bg {
+        display: none;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .hero {
+        min-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/perfil.jpg" alt="Logo Teravita" class="logo-topo">
+    <h1>Teravita</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendamento.html">Agendamento</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+
+    <div class="hero-content">
+      <h2>Bem-estar e qualidade de vida</h2>
+      <p>Descubra os benefícios da quiropraxia e massoterapia para sua saúde física e mental.</p>
+      <a href="servicos.html" class="btn">Conheça nossos serviços</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Teravita - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>

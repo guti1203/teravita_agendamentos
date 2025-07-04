@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teravita | Quiropraxia e Massoterapia</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --marrom-escuro: #4b3527;
+      --marrom-medio: #6e4f3a;
+      --marrom-claro: #a3755c;
+      --bege: #f8f6f4;
+      --branco: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--bege);
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: var(--marrom-escuro);
+      color: var(--branco);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .logo-topo {
+      width: 80px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 0;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    nav a:hover {
+      background-color: var(--marrom-claro);
+    }
+    
+    .hero {
+      flex: 1;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--branco);
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+    
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--marrom-claro);
+      color: var(--branco);
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: var(--marrom-medio);
+      transform: translateY(-3px);
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--branco);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      z-index: 2;
+      cursor: pointer;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+    
+    .sobre {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .sobre h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--marrom-escuro);
+    }
+    
+    .sobre h3 {
+      color: var(--marrom-medio);
+      margin: 25px 0 15px;
+      font-size: 1.4rem;
+    }
+    
+    .sobre p {
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .sobre ul {
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .sobre li {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .sobre strong {
+      color: var(--marrom-escuro);
+    }
+    
+    footer {
+      background-color: var(--marrom-escuro);
+      color: var(--branco);
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+    
+    @media (max-width: 1024px) {
+      .hero {
+        min-height: 80vh;
+      }
+      
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      nav ul {
+        gap: 10px;
+      }
+      
+      .hero {
+        min-height: 70vh;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+      }
+      
+      .sobre {
+        padding: 40px 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 10px;
+      }
+      
+      .logo-topo {
+        width: 70px;
+      }
+      
+      h1 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+      
+      nav a {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+      }
+      
+      .hero {
+        min-height: 80vh;
+        background-image: url('img/banner-mobile.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .hero-bg {
+        display: none;
+      }
+      
+      .hero h2 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+      }
+      
+      .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+      }
+      
+      .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .sobre h2 {
+        font-size: 1.6rem;
+      }
+      
+      .sobre h3 {
+        font-size: 1.2rem;
+      }
+    }
+    
+    @media (min-width: 481px) {
+      .hero {
+        background-image: url('img/banner.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .hero-bg {
+        display: none;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .hero {
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/perfil.jpg" alt="Logo Teravita" class="logo-topo">
+    <h1>Teravita</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendamento.html">Agendamento</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    
+    <a href="#sobre" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+  
+  <section class="sobre" id="sobre">
+    <h2>Quem eu sou?</h2>
+    <p><strong>Muito prazer, Bruno Rafael Ribeiro da Silva</strong><br>
+    Especialista em Terapias Manuais e Quiropraxia Clínica</p>
+
+    <p>Minha trajetória é construída com dedicação ao cuidado do corpo e da mente por meio de técnicas manuais comprovadas e integrativas. Acredito no poder do toque terapêutico como ferramenta de transformação e alívio.</p>
+
+    <h3>Formações e Certificações Profissionais</h3>
+    <ul>
+      <li><strong>Curso Intensivo Prático - Método Myoteraphy</strong> - Método Myoteraphy - Luana Lima (2025)<br> 
+      Curso intensivo prático com foco em técinicas manuais de liberação miofascial pontual para atletas.</li>
+
+      <li><strong>Quiropraxia Clínica</strong> – Instituto Terapia Manual (2023)<br>
+      Atendimento clínico de disfunções articulares, dores musculares e desalinhamentos posturais com técnicas manipulativas avançadas.</li>
+
+      <li><strong>Ventosaterapia, Moxa, Sangria e Gua Sha</strong> – Espaço Holos Cursos e Terapias (2022)<br>
+      Técnicas da Medicina Tradicional Chinesa para tratamento de dores, liberação miofascial, equilíbrio energético e recuperação muscular.</li>
+
+      <li><strong>Liberação Miofascial</strong> – Espaço Holos Cursos e Terapias (2021)<br>
+      Técnica aplicada na fáscia muscular, promovendo alívio de tensões, mobilidade e bem-estar.</li>
+
+      <li><strong>Massagem Relaxante</strong> – Espaço Holos Cursos e Terapias (2021)<br>
+      Foco em redução do estresse, tensões e promoção do bem-estar físico e emocional.</li>
+    </ul>
+
+    <h3>Missão Profissional</h3>
+    <p>Oferecer um atendimento humanizado, eficaz e comprometido com a saúde integral do paciente. Minha missão é proporcionar alívio, equilíbrio e qualidade de vida por meio da combinação entre técnica, sensibilidade e conhecimento.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Teravita - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>

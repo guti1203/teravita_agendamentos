@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento | Teravita</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("agendamentoForm");
+
+      function gerarPDF(dados) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 10;
+
+        doc.setFontSize(12);
+        Object.entries(dados).forEach(([chave, valor]) => {
+          if (valor && valor.toString().trim() !== "") {
+            const linhas = doc.splitTextToSize(`${chave}: ${valor}`, 180);
+            linhas.forEach((linha) => {
+              doc.text(linha, 10, y);
+              y += 8;
+              if (y > 280) {
+                doc.addPage();
+                y = 10;
+              }
+            });
+          }
+        });
+
+        doc.save("agendamento.pdf");
+      }
+
+      function enviarParaWhatsApp(dados) {
+        let mensagem = "Novo agendamento Teravita:\n";
+        Object.entries(dados).forEach(([chave, valor]) => {
+          if (valor && valor.toString().trim() !== "") {
+            mensagem += `${chave}: ${valor}\n`;
+          }
+        });
+        const url = `https://api.whatsapp.com/send?phone=5511977279045&text=${encodeURIComponent(mensagem)}`;
+        window.open(url, "_blank");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const dadosFormulario = {
+          Nome: form.nome.value.trim(),
+          Telefone: form.telefone.value.trim(),
+          Idade: form.idade.value,
+          "Cuidados Médicos": form.cuidados_medicos.value,
+          "Médico/Especialidade": form.especialidade.value,
+          "Medicamentos Contínuos": form.medicamentos.value,
+          "Quais Medicamentos": form.quais_medicamentos.value,
+          "Já fez cirurgia": form.cirurgia.value,
+          "Quais Cirurgias": form.quais_cirurgias.value,
+          "Condições de Saúde": Array.from(form.querySelectorAll("input[name='condicoes']:checked")).map(el => el.value).join(", "),
+          "Sente Dores": form.dores.value,
+          "Onde Sente Dor": form.onde_dor.value,
+          "Intensidade da Dor": form.intensidade.value,
+          "Alergia": form.alergia.value,
+          "Quais Alergias": form.quais_alergias.value,
+          "Tratamentos Já Realizados": Array.from(form.querySelectorAll("input[name='tratamentos']:checked")).map(el => el.value).join(", "),
+          "Preferência ou Restrição": form.preferencias.value,
+          "Contraindicação Médica": form.contraindicacao.value,
+          "Quais Contraindicações": form.quais_contra.value,
+          "Gravidez/Pós-parto": form.gravidez.value,
+          Serviço: form.servico.value,
+          Data: form.data.value,
+          Hora: form.hora.value
+        };
+
+        let erros = [];
+        if (!dadosFormulario.Nome) erros.push("Preencha o nome completo.");
+        if (!dadosFormulario.Telefone) erros.push("Informe um telefone válido.");
+        if (dadosFormulario["Intensidade da Dor"] && (dadosFormulario["Intensidade da Dor"] < 0 || dadosFormulario["Intensidade da Dor"] > 10)) erros.push("A intensidade da dor deve estar entre 0 e 10.");
+        if (!dadosFormulario.Serviço) erros.push("Selecione um serviço desejado.");
+        if (!dadosFormulario.Data) erros.push("Escolha uma data preferida.");
+        if (!dadosFormulario.Hora) erros.push("Escolha um horário preferido.");
+
+        if (erros.length > 0) {
+          alert("Corrija os seguintes erros:\n\n" + erros.join("\n"));
+          return;
+        }
+
+        try {
+          gerarPDF(dadosFormulario);
+          alert("Seu agendamento foi iniciado. O WhatsApp será aberto para finalizar.");
+          enviarParaWhatsApp(dadosFormulario);
+          form.reset();
+        } catch (error) {
+          console.error("Erro ao gerar ou enviar PDF:", error);
+          alert("Erro ao finalizar o agendamento. Tente novamente.");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+<header>
+  <img src="img/perfil.jpg" alt="Logo Teravita" class="logo-topo">
+  <h1 style="text-align: center;">Teravita</h1>  
+  <nav>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="formulario-agendamento">
+  <h2>Agende Sua Sessão</h2>
+  <form id="agendamentoForm">
+    <label for="nome">Nome completo:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" name="idade">
+
+    <label for="telefone">Telefone / WhatsApp:</label>
+    <input type="tel" id="telefone" name="telefone" required>
+    
+ <label>Você está sob cuidados médicos atualmente?</label>
+    <select name="cuidados_medicos">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="especialidade">Se sim, qual médico/especialidade?</label>
+    <input type="text" id="especialidade" name="especialidade">
+
+    <label>Faz uso de medicamentos contínuos?</label>
+    <select name="medicamentos">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="quais_medicamentos">Quais?</label>
+    <input type="text" id="quais_medicamentos" name="quais_medicamentos">
+
+    <label>Já passou por alguma cirurgia?</label>
+    <select name="cirurgia">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="quais_cirurgias">Qual(is) e quando?</label>
+    <input type="text" id="quais_cirurgias" name="quais_cirurgias">
+
+    <fieldset>
+      <legend>Condições de saúde (marque as que se aplicam):</legend>
+      <label><input type="checkbox" name="condicoes" value="Hipertensão"> Hipertensão</label>
+      <label><input type="checkbox" name="condicoes" value="Diabetes"> Diabetes</label>
+      <label><input type="checkbox" name="condicoes" value="Problemas cardíacos"> Problemas cardíacos</label>
+      <label><input type="checkbox" name="condicoes" value="Hérnia de disco"> Hérnia de disco</label>
+      <label><input type="checkbox" name="condicoes" value="Problemas respiratórios"> Problemas respiratórios</label>
+      <label><input type="checkbox" name="condicoes" value="Doenças autoimunes"> Doenças autoimunes</label>
+      <label><input type="checkbox" name="condicoes" value="Osteoporose"> Osteoporose</label>
+      <label><input type="checkbox" name="condicoes" value="Nenhuma"> Nenhuma</label>
+    </fieldset>
+
+    <label for="dores">Sente dores frequentes?</label>
+    <select name="dores">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="onde_dor">Onde?</label>
+    <input type="text" id="onde_dor" name="onde_dor">
+
+    <label for="intensidade">Intensidade (0 a 10):</label>
+    <input type="number" id="intensidade" name="intensidade" min="0" max="10">
+
+    <label>Tem alergia a algum produto?</label>
+    <select name="alergia">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="quais_alergias">Quais?</label>
+    <input type="text" id="quais_alergias" name="quais_alergias">
+
+    <fieldset>
+      <legend>Já realizou algum tratamento?</legend>
+      <label><input type="checkbox" name="tratamentos" value="Quiropraxia"> Quiropraxia</label>
+      <label><input type="checkbox" name="tratamentos" value="Massoterapia"> Massoterapia</label>
+      <label><input type="checkbox" name="tratamentos" value="Ventosaterapia"> Ventosaterapia</label>
+      <label><input type="checkbox" name="tratamentos" value="Acupuntura"> Acupuntura</label>
+      <label><input type="checkbox" name="tratamentos" value="Nenhum"> Nenhum</label>
+    </fieldset>
+
+    <label for="preferencias">Preferência ou restrição na sessão:</label>
+    <textarea id="preferencias" name="preferencias"></textarea>
+
+    <label>Contraindicação médica para terapias?</label>
+    <select name="contraindicacao">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="quais_contra">Quais?</label>
+    <input type="text" id="quais_contra" name="quais_contra">
+
+    <label>Está grávida ou em pós-parto?</label>
+    <select name="gravidez">
+      <option value="">--Selecione--</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+      <option value="Não se aplica">Não se aplica</option>
+    </select>
+
+    <label for="servico">Serviço desejado:</label>
+    <select id="servico" name="servico" required>
+      <option value="">--Selecione--</option>
+      <option value="Quiropraxia">Quiropraxia</option>
+      <option value="Massagem Relaxante">Massagem Relaxante</option>
+      <option value="Liberação Miofascial">Massagem Miofascial (Desportiva) + Ventosas</option>
+      <option value="Metodo Myoteraphy">Método Myoteraphy</option>
+      <option value="TAPE">Aplicação Kinésio Tape</option>
+    </select>
+
+
+    <label for="data">Data preferida:</label>
+    <input type="date" id="data" name="data" required>
+
+    <label for="hora">Horário preferido:</label>
+    <input type="time" id="hora" name="hora" required>
+
+    <button type="submit">Agendar</button>
+  </form>
+  <p class="aviso">* Um sinal é solicitado após o agendamento. Entraremos em contato para confirmar.</p>
+</section>
+
+<footer>
+  <p>&copy; 2025 Teravita - Todos os direitos reservados</p>
+</footer>
+
+</body>
+</html>

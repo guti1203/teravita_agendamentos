@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços | Teravita</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    :root {
+      --marrom-escuro: #4b3527;
+      --marrom-medio: #6e4f3a;
+      --marrom-claro: #a3755c;
+      --bege: #f8f6f4;
+      --branco: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--bege);
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: var(--marrom-medio);
+      color: var(--branco);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .logo-topo {
+      width: 80px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 0;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    nav a:hover {
+      background-color: var(--marrom-claro);
+    }
+    
+    nav a.ativo {
+      border-bottom: 2px solid var(--branco);
+    }
+    
+    .intro-servicos {
+      text-align: center;
+      padding: 30px 20px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .intro-servicos h2 {
+      font-size: 2rem;
+      color: var(--marrom-medio);
+      margin-bottom: 15px;
+    }
+    
+    .intro-servicos p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    
+    .servicos-container {
+      flex: 1;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .servicos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .servico {
+      background-color: var(--branco);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    
+    .servico:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .servico h3 {
+      color: var(--marrom-medio);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    .servico .preco {
+      font-weight: bold;
+      color: var(--marrom-escuro);
+      margin: 10px 0;
+    }
+    
+    .servico .descricao {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    footer {
+      background-color: var(--marrom-medio);
+      color: var(--branco);
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .intro-servicos h2 {
+        font-size: 1.7rem;
+      }
+      
+      .intro-servicos p {
+        font-size: 1rem;
+      }
+      
+      .servicos {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 10px 15px;
+      }
+      
+      .logo-topo {
+        width: 70px;
+      }
+      
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      nav a {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+      }
+      
+      .intro-servicos {
+        padding: 20px 15px;
+      }
+      
+      .intro-servicos h2 {
+        font-size: 1.5rem;
+      }
+      
+      .servicos-container {
+        padding: 15px;
+      }
+      
+      .servico {
+        padding: 15px;
+      }
+      
+      .servico h3 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/perfil.jpg" alt="Logo Teravita" class="logo-topo">
+    <h1>Teravita</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html" class="ativo">Serviços</a></li>
+        <li><a href="agendamento.html">Agendamento</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro-servicos">
+      <h2>Nossos Serviços</h2>
+      <p>Descubra nossas terapias exclusivas para o seu bem-estar físico e emocional. Clique para saber mais sobre cada uma.</p>
+    </section>
+
+    <section class="servicos-container">
+      <div class="servicos">
+        <div class="servico" onclick="window.location.href='agendamento.html'">
+          <h3>Liberação Miofascial (Desportiva) + Ventosas</h3>
+          <p class="preco">A partir de R$180</p>
+          <p class="descricao">Combinação que solta tensões profundas nos músculos e melhora a circulação e desintoxicação com ventosas. Ideal para dor muscular crônica, travamentos e rigidez.</p>
+        </div>
+        
+        <div class="servico" onclick="window.location.href='agendamento.html'">
+          <h3>Massagem Relaxante</h3>
+          <p class="preco">A partir de R$120</p>
+          <p class="descricao">Toques suaves e ritmados para aliviar o estresse, ansiedade e tensões do dia a dia. Proporciona bem-estar físico e mental.</p>
+        </div>
+        
+        <div class="servico" onclick="window.location.href='agendamento.html'">
+          <h3>Método Myo Therapy</h3>
+          <p class="preco">A partir de R$200</p>
+          <p class="descricao">Método utilizado em atletas para melhorar performance nos palcos e treinos, ajuda na melhora da consiencia corporal ajudando a posicional o corpo de forma inteligente e assim ter uma conexão neural entre cérebro e corpo.</p>
+        </div>
+      
+        
+        <div class="servico" onclick="window.location.href='agendamento.html'">
+          <h3>Quiropraxia</h3>
+          <p class="preco">A partir de R$170</p>
+          <p class="descricao">Técnica manual que ajusta a coluna e articulações para aliviar dores, melhorar a mobilidade e o alinhamento do corpo. Muito usada para dores nas costas, pescoço e cabeça.</p>
+        </div>
+
+
+         <div class="servico" onclick="window.location.href='agendamento.html'">
+          <h3>Aplicação de Kinésio Tape</h3>
+          <p class="preco">A partir de R$10</p>
+          <p class="descricao">A fita kinesio tape, também conhecida como fita cinesiológica, pode ajudar a reduzir dores, melhorar a flexibilidade e a estabilidade das articulações. Ela pode ser usada para tratar lesões nos nervos e tensões musculares. Alguns dos benefícios da fita kinesio tape são: Reduzir a dor Melhorar a flexibilidade; Melhorar o alinhamento postural; Aumentar a circulação sanguínea e linfática; Realinhar os músculos Dar estabilidade às articulações; Promover a propriocepção, a coordenação e o equilíbrio corporal; Ajudar a evitar lesões adicionais</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Teravita - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>
