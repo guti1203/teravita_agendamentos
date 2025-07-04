@@ -32,7 +32,7 @@ Editar
 
 ## 🔗 Acesse o site
 
-[👉 Clique aqui para ver online][(https://seuusuario.github.io/teravita)](https://kaleidoscopic-biscuit-078d69.netlify.app/)
+[👉 Clique aqui para ver online](https://kaleidoscopic-biscuit-078d69.netlify.app/)
 
 ## 🧑‍💻 Autor
 
